@@ -47,7 +47,7 @@ services:
   kibana:
     container_name: kibana
     build:
-      context: kibana/
+      context: kibana
       args:
         ELK_VERSION: $ELK_VERSION
     volumes:
@@ -80,8 +80,10 @@ services:
       - elk
   filebeat:
     container_name: filebeat
-    image: docker.elastic.co/beats/filebeat:7.9.0
-    container_name: filebeat
+    build:
+      context: filebeat
+      args:
+        ELK_VERSION: $ELK_VERSION
     volumes:
       - './nginx/log:/var/log/nginx/:ro'
       - './filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml:rw'
