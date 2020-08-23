@@ -1,0 +1,13 @@
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - /var/log/nginx/access.log
+      - /var/log/nginx/error.log
+    exclude_files: ['\.gz$']
+
+setup.kibana:
+  host: "http://kibana:5601"
+
+output.logstash:
+  hosts: ["logstash:5000"]

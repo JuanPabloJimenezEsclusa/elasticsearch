@@ -67,6 +67,7 @@ services:
       - './nginx/etc/nginx.conf:/etc/nginx/nginx.conf:ro'
       - './nginx/public:/usr/share/nginx/html:ro'
       - './nginx/etc/.htpasswd.user:/etc/nginx/.htpasswd.user:ro'
+      - './nginx/log:/var/log/nginx:rw'
     links:
       - elasticsearch
       - kibana
@@ -75,5 +76,20 @@ services:
       - kibana
     ports:
       - '80:80'
+    networks:
+      - elk
+  filebeat:
+    container_name: filebeat
+    image: docker.elastic.co/beats/filebeat:7.9.0
+    container_name: filebeat
+    volumes:
+      - './nginx/log:/var/log/nginx/:ro'
+      - './filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml:rw'
+    links:
+      - elasticsearch
+      - kibana
+    depends_on:
+      - elasticsearch
+      - kibana
     networks:
       - elk

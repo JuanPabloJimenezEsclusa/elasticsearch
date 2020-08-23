@@ -1,5 +1,7 @@
-elasticsearch/storage/nodes/
-
+elasticsearch/storage/**
+!/elasticsearch/storage/dummy.txt
+/nginx/log/**
+!/nginx/log/dummy.txt
 
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,eclipse,git,intellij+all
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,eclipse,git,intellij+all
